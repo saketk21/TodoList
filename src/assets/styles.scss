@@ -1,0 +1,130 @@
+@import "colors.scss";
+@import "utilities.scss";
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+
+    * {
+        box-sizing: inherit;
+    }
+}
+
+::-webkit-scrollbar {
+    padding: 2rem 0;
+    width: 5px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    margin: 2rem 0;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    margin: 5rem 0;
+    padding-top: 7rem;
+    background: #aaa;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+body {
+    background-color: #efefef;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    overflow-y: -moz-scrollbars-none;
+
+    h1.hero-heading {
+        font-size: 5rem;
+        color: transparent;
+        background-image: $hero-color;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 4.5rem;
+    }
+
+    p.hero-subline {
+        color: gray;
+    }
+
+    .mobile-display {
+        background-color: white;
+        width: 325px;
+        height: 600px;
+        border-radius: 25px;
+        box-shadow: 0 0 50px #cfcfcf;
+        padding: 1em;
+        overflow-y: auto;
+        overflow-y: -moz-scrollbars-none;
+    }
+
+    .list-container {
+        height: 100%;
+
+        ul {
+            list-style-type: none;
+            padding-bottom: 4rem;
+
+            .list-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                overflow-x: hidden;
+                flex-wrap: nowrap;
+                border-bottom: 1px solid lightgray;
+
+                .overflow {
+                    overflow-x: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    padding: 1rem;
+                }
+
+                .remove-item {
+                    text-align: right;
+                    color: gray;
+                    font-size: 1.25rem;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        button.btn-floating-add {
+            font-size: 1rem;
+            border: none;
+            border-radius: 50%;
+            padding: 0.25rem;
+            cursor: pointer;
+            color: white;
+            background: $hero-color;
+            position: fixed;
+            top: calc(50% + 280px);
+            left: calc(75% + 142px);
+            margin-top: -3rem;
+            margin-left: -3rem;
+
+            span.material-icons {
+                font-size: 2.25rem;
+            }
+        }
+    }
+
+    #addItemContainer {
+        display: none;
+        position: relative;
+    }
+}

@@ -1,0 +1,37 @@
+.flex {
+    display: flex;
+
+    &.col {
+        flex-direction: column;
+    }
+
+    &.h-center {
+        justify-content: center;
+    }
+    &.h-right {
+        justify-content: flex-end;
+    }
+    &.h-evenly {
+        justify-content: space-evenly;
+    }
+    &.v-center {
+        align-items: center;
+    }
+    &.v-right {
+        align-items: flex-end;
+    }
+    &.center {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.grid {
+    display: grid;
+
+    &.two-col {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+$hero-color: linear-gradient(-0.125turn, dodgerblue, lightgreen);
