@@ -10,8 +10,8 @@ $(() => {
     ];
 
     const animateListAddMode = () => {
-        $("div.list-container").fadeToggle(200, () => {
-            $("div.animation-container-hidden").fadeToggle(400);
+        $('div.list-container').fadeToggle(200, () => {
+            $('div.animation-container-hidden').fadeToggle(400);
         });
     };
 
@@ -23,16 +23,16 @@ $(() => {
     }
 
     const animateAndAddItem = (listItem) => {
-        $("div.animation-container-hidden").fadeToggle(200, () => {
-            $("div.list-container").fadeToggle(400);
+        $('div.animation-container-hidden').fadeToggle(200, () => {
+            $('div.list-container').fadeToggle(400);
             addListItem(listItem);
         });
     }
 
     const animateAndCancelAdd = () => {
-        $("div.animation-container-hidden").fadeToggle(200, () => {
-            $("div.list-container").fadeToggle(400);
-            $("#addNewItem").val('');
+        $('div.animation-container-hidden').fadeToggle(200, () => {
+            $('div.list-container').fadeToggle(400);
+            $('#addNewItem').val('');
         });
     }
 
@@ -50,8 +50,8 @@ $(() => {
     const useSuggestion = (suggestionText) => {
         suggestionText = suggestionText.trim().split('...')[0];
         suggestionText += ' ';
-        $("#addNewItem").val(suggestionText);
-        $("#addNewItem").trigger('focus')
+        $('#addNewItem').val(suggestionText);
+        $('#addNewItem').trigger('focus')
     };
 
     const paint = () => {
@@ -85,43 +85,43 @@ $(() => {
         };
 
         // Re-render todoList
-        $("#listItems").html('');
+        $('#listItems').html('');
         todoList.forEach((listItem, index) => {
             const listItemNode = createListItemNode(listItem, index);
-            $("#listItems").append(listItemNode);
+            $('#listItems').append(listItemNode);
         });
 
         // Hide or show no items message if no items present
         if (todoList.length === 0) {
-            $("#listItems").addClass('display-none');
+            $('#listItems').addClass('display-none');
             $('#noItemsContainer').removeClass('display-none');
         } else {
-            $("#listItems").removeClass('display-none');
+            $('#listItems').removeClass('display-none');
             $('#noItemsContainer').addClass('display-none');
         }
 
         // Clear the input
-        $("#addNewItem").val('');
+        $('#addNewItem').val('');
     };
 
     (() => {
-        $("#btnAddItem").on('click', () => {
+        $('#btnAddItem').on('click', () => {
             animateListAddMode();
         });
 
-        $("#addNewItem").on('keypress', (event) => {
+        $('#addNewItem').on('keypress', (event) => {
             if (event.originalEvent.key === 'Enter' && event.originalEvent.target.value) {
                 const listItemText = event.originalEvent.target.value;
                 animateAndAddItem(listItemText);
             }
         });
 
-        $(".card").on('click', (event) => {
+        $('.card').on('click', (event) => {
             const suggestionText = event.originalEvent.target.innerText;
             useSuggestion(suggestionText);
         });
 
-        $("#cancelAddItem").on('click', () => {
+        $('#cancelAddItem').on('click', () => {
             animateAndCancelAdd();
         });
 
