@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.bundle.css" type="text/css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>TodoList</title>
+</head>
+
+<body class="grid two-col">
+  <div class="hero flex v-right h-center col">
+    <h1 class="hero-heading">
+      TodoList
+    </h1>
+    <p class="hero-subline">A pet project by saketk21</p>
+  </div>
+  <div class="flex center">
+    <div class="mobile-display">
+      <div class="camera-notch"></div>
+      <div class="list-container">
+        <ul class="list-items" id="listItems">
+        </ul>
+        <div id="noItemsContainer" class="no-items flex center">
+          <h4 class="no-items-heading">
+            Your tasks are all done!
+          </h4>
+        </div>
+        <button id="btnAddItem" class="btn-floating-add" title="Add Item">
+          <span class="material-icons">&#xE145;</span>
+        </button>
+      </div>
+
+      <div class="animation-container-hidden">
+        <div class="add-item-container" id="addItemContainer">
+          <div class="action-bar">
+            <button class="material-icons button-cancel-add" id="cancelAddItem">
+              &#xE5CD;
+            </button>
+          </div>
+          <div class="add-item-input">
+            <input type="text" class="add-new-item" name="addNewItem" id="addNewItem"
+              placeholder="What do you need to do?">
+          </div>
+          <div class="add-item-suggestions">
+            <h4>Suggestions:</h4>
+            <div class="card-row">
+              <button class="card card__personal">Meet...</button>
+              <button class="card card__personal">Clean...</button>
+              <button class="card card__personal">Get...</button>
+            </div>
+            <div class="card-row">
+              <button class="card card__shop">Buy...</button>
+              <button class="card card__shop">Wishlist...</button>
+              <button class="card card__shop">Find...</button>
+            </div>
+            <div class="card-row">
+              <button class="card card__work">Email...</button>
+              <button class="card card__work">Create...</button>
+              <button class="card card__work">Code...</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./main.bundle.js"></script>
+</body>
+
+</html>
