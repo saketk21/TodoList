@@ -3,30 +3,16 @@ import * as $ from 'jquery';
 
 $(() => {
     let todoList = [
-        'Buy some eggs and meet up with Neil DeGrasse Tyson for a powwow on space and astronomy',
-        'Call Dad for some money',
-        'Read Harry Potter and The Order of Phoenix',
-        'Buy some eggs and meet up with Neil DeGrasse Tyson for a powwow on space and astronomy',
-        'Call Dad for some money',
-        'Read Harry Potter and The Order of Phoenix', 'Buy some eggs and meet up with Neil DeGrasse Tyson for a powwow on space and astronomy',
-        'Call Dad for some money',
-        'Read Harry Potter and The Order of Phoenix', 'Buy some eggs and meet up with Neil DeGrasse Tyson for a powwow on space and astronomy',
-        'Call Dad for some money',
-        'Read Harry Potter and The Order of Phoenix', 'Buy some eggs and meet up with Neil DeGrasse Tyson for a powwow on space and astronomy',
-        'Call Dad for some money',
-        'Read Harry Potter and The Order of Phoenix'
+        'Meet Cathy for UI discussion',
+        'Design new UI Tour implementation',
+        'Buy outdoor shorts',
+        'Throw away old sweatshirt'
     ];
 
-    const animateListAddMode = (isAddMode) => {
-        if (isAddMode) {
-            $("div.list-container").fadeToggle(400, () => {
-                $("#addItemContainer").fadeToggle(400);
-            });
-        } else {
-            $("#addItemContainer").fadeToggle(400, () => {
-                $("div.list-container").fadeToggle(400);
-            });
-        }
+    const animateListAddMode = () => {
+        $("div.list-container").fadeToggle(200, () => {
+            $("div.animation-container-hidden").fadeToggle(400);
+        });
     };
 
     const addListItem = (listItem) => {
@@ -36,13 +22,43 @@ $(() => {
         }
     }
 
+    const animateAndAddItem = (listItem) => {
+        $("div.animation-container-hidden").fadeToggle(200, () => {
+            $("div.list-container").fadeToggle(400);
+            addListItem(listItem);
+        });
+    }
+
+    const animateAndCancelAdd = () => {
+        $("div.animation-container-hidden").fadeToggle(200, () => {
+            $("div.list-container").fadeToggle(400);
+            $("#addNewItem").val('');
+        });
+    }
+
+    const animateAndRemoveItem = (element, removedItemIndex) => {
+        $(element).slideUp(200, () => {
+            removeListItem(removedItemIndex);
+        });
+    };
+
     const removeListItem = (removedItemIndex) => {
         todoList = todoList.filter((_item, index) => removedItemIndex !== index);
         paint();
     }
 
+    const useSuggestion = (suggestionText) => {
+        suggestionText = suggestionText.trim().split('...')[0];
+        suggestionText += ' ';
+        $("#addNewItem").val(suggestionText);
+        $("#addNewItem").trigger('focus')
+    };
+
     const paint = () => {
         const createListItemNode = (listItem, index) => {
+            // List Item element
+            const li = document.createElement('li');
+
             // Add Item Label
             const itemLabel = document.createElement('span');
             itemLabel.classList.add('overflow');
@@ -50,21 +66,21 @@ $(() => {
             itemLabel.setAttribute('title', listItem);
 
             // Add Remove Icon
-            const removeIcon = document.createElement('span');
-            removeIcon.setAttribute('data-item-index', index);
-            removeIcon.innerHTML = '&#xE5CD;';
-            removeIcon.classList.add('material-icons', 'remove-item');
+            const removeButton = document.createElement('button');
+            removeButton.setAttribute('data-item-index', index);
+            removeButton.innerHTML = '&#xE5CD;';
+            removeButton.classList.add('material-icons', 'remove-item');
 
             // Hook click event for removing items
-            removeIcon.addEventListener('click', () => {
-                removeListItem(index);
+            removeButton.addEventListener('click', () => {
+                const element = li;
+                animateAndRemoveItem(element, index);
             });
 
             // Add all the individual elements to parent
-            const li = document.createElement('li');
             li.classList.add('list-item');
             li.append(itemLabel);
-            li.append(removeIcon);
+            li.append(removeButton);
             return li;
         };
 
@@ -75,21 +91,38 @@ $(() => {
             $("#listItems").append(listItemNode);
         });
 
+        // Hide or show no items message if no items present
+        if (todoList.length === 0) {
+            $("#listItems").addClass('display-none');
+            $('#noItemsContainer').removeClass('display-none');
+        } else {
+            $("#listItems").removeClass('display-none');
+            $('#noItemsContainer').addClass('display-none');
+        }
+
         // Clear the input
         $("#addNewItem").val('');
     };
 
     (() => {
         $("#btnAddItem").on('click', () => {
-            animateListAddMode(true);
+            animateListAddMode();
         });
 
         $("#addNewItem").on('keypress', (event) => {
-            if (event.originalEvent.key === 'Enter') {
+            if (event.originalEvent.key === 'Enter' && event.originalEvent.target.value) {
                 const listItemText = event.originalEvent.target.value;
-                addListItem(listItemText);
-                animateListAddMode(false);
+                animateAndAddItem(listItemText);
             }
+        });
+
+        $(".card").on('click', (event) => {
+            const suggestionText = event.originalEvent.target.innerText;
+            useSuggestion(suggestionText);
+        });
+
+        $("#cancelAddItem").on('click', () => {
+            animateAndCancelAdd();
         });
 
         paint();

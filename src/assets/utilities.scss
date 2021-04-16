@@ -8,18 +8,23 @@
     &.h-center {
         justify-content: center;
     }
+
     &.h-right {
         justify-content: flex-end;
     }
+
     &.h-evenly {
         justify-content: space-evenly;
     }
+
     &.v-center {
         align-items: center;
     }
+
     &.v-right {
         align-items: flex-end;
     }
+
     &.center {
         justify-content: center;
         align-items: center;
@@ -34,4 +39,12 @@
     }
 }
 
-$hero-color: linear-gradient(-0.125turn, dodgerblue, lightgreen);
+button {
+    &:focus {
+        outline: none;
+    }
+}
+
+.display-none {
+    display: none;
+}

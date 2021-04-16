@@ -1,5 +1,5 @@
-@import "colors.scss";
-@import "utilities.scss";
+@import "colors";
+@import "utilities";
 
 *,
 *::before,
@@ -17,19 +17,17 @@ html {
 }
 
 ::-webkit-scrollbar {
-    padding: 2rem 0;
     width: 5px;
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    margin: 2rem 0;
+    margin: 5rem 0;
     background: #f1f1f1;
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    margin: 5rem 0;
     padding-top: 7rem;
     background: #aaa;
     border-radius: 5px;
@@ -41,45 +39,69 @@ html {
 }
 
 body {
-    background-color: #efefef;
+    background-color: $white;
     height: 100vh;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
+    color: $gray400;
     overflow-y: -moz-scrollbars-none;
 
-    h1.hero-heading {
-        font-size: 5rem;
-        color: transparent;
-        background-image: $hero-color;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        line-height: 4.5rem;
-    }
+    .hero {
+        h1.hero-heading {
+            font-size: 5rem;
+            color: transparent;
+            background-image: $hero-color;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 4.5rem;
+        }
 
-    p.hero-subline {
-        color: gray;
+        p.hero-subline {
+            color: gray;
+        }
     }
 
     .mobile-display {
-        background-color: white;
+        background-color: $white;
         width: 325px;
         height: 600px;
+        border: 5px solid;
         border-radius: 25px;
-        box-shadow: 0 0 50px #cfcfcf;
-        padding: 1em;
+        box-shadow: 0 0 20px 3px #cfcfcf;
+        padding: 1rem;
         overflow-y: auto;
         overflow-y: -moz-scrollbars-none;
+
+        .camera-notch {
+            width: 10px;
+            height: 10px;
+            background-image: linear-gradient(0.125turn, lightgray, white);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px slategray;
+            position: absolute;
+        }
     }
 
     .list-container {
         height: 100%;
+
+        .no-items {
+            height: 100%;
+
+            .no-items-heading {
+                color: $gray200;
+                font-size: 1.25rem;
+                font-weight: 400;
+            }
+        }
 
         ul {
             list-style-type: none;
             padding-bottom: 4rem;
 
             .list-item {
+                color: $gray400;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -95,10 +117,12 @@ body {
                 }
 
                 .remove-item {
-                    text-align: right;
-                    color: gray;
-                    font-size: 1.25rem;
+                    border: none;
+                    background: transparent;
                     cursor: pointer;
+                    color: rgb(163, 163, 163);
+                    font-size: 1.25rem;
+
                 }
             }
         }
@@ -109,13 +133,18 @@ body {
             border-radius: 50%;
             padding: 0.25rem;
             cursor: pointer;
-            color: white;
+            color: $white;
             background: $hero-color;
             position: fixed;
             top: calc(50% + 280px);
             left: calc(75% + 142px);
             margin-top: -3rem;
             margin-left: -3rem;
+            box-shadow: 0 0 5px 1px lightslategray;
+
+            &:focus {
+                border: none;
+            }
 
             span.material-icons {
                 font-size: 2.25rem;
@@ -123,8 +152,94 @@ body {
         }
     }
 
-    #addItemContainer {
+    .animation-container-hidden {
         display: none;
-        position: relative;
+        height: 100%;
+    }
+
+    .add-item-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .action-bar {
+            display: flex;
+            justify-content: flex-end;
+
+            .button-cancel-add {
+                color: $gray200;
+                border: none;
+                outline: none;
+                background-color: transparent;
+                cursor: pointer;
+            }
+        }
+
+        .add-item-suggestions {
+            h4 {
+                font-size: 0.875rem;
+                font-weight: 400;
+                margin-bottom: 1rem;
+            }
+
+            .card-row {
+                display: flex;
+                margin-bottom: 0.5rem;
+
+                .card {
+                    margin-right: 0.5rem;
+                    padding: 1rem;
+                    border: none;
+                    border-radius: 10px;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    font-family: 'Poppins', sans-serif;
+                    background-color: $gray200;
+                    color: $gray400;
+                    transition: all 200ms ease-in-out;
+
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.05);
+                    }
+                }
+
+                .card__personal {
+                    background-color: $green200;
+                    color: $green800;
+                }
+
+                .card__shop {
+                    background-color: $purple200;
+                    color: $purple800;
+                }
+
+                .card__work {
+                    background-color: $blue200;
+                    color: $blue800;
+                }
+            }
+        }
+
+        .add-new-item {
+            border: none;
+            border-left: 0.25rem solid $no-focus-color;
+            color: $gray400;
+            padding: 0.125rem;
+            font-size: 1.25rem;
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            caret-color: $gray200;
+
+            &::placeholder {
+                color: $gray200;
+            }
+
+            &:focus {
+                outline: none;
+                border-left: 0.25rem solid $focus-color;
+            }
+        }
     }
 }
