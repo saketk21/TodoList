@@ -4,7 +4,7 @@ import * as $ from 'jquery';
 $(() => {
     let todoList = [
         'Meet Cathy for UI discussion',
-        'Design new UI Tour implementation',
+        'Design new UI Tour',
         'Buy outdoor shorts',
         'Throw away old sweatshirt'
     ];
